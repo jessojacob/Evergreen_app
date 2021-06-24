@@ -1,11 +1,12 @@
 const mysql = require('mysql');
+const CONFIG = require('../env/config');
 
 var connectDB = mysql.createConnection({
-    host: "localhost",
-    port: "3306",
-    user: "root",
-    password: "root",
-    database:"userdb"
+    host: CONFIG.host,
+    port: CONFIG.db_port,
+    user: CONFIG.user,
+    password: CONFIG.db_password,
+    database:CONFIG.database
   });
   
   connectDB.connect(function(err) {

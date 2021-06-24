@@ -2,8 +2,18 @@ const PORT=3000
 const key = "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC7mKXRRJZ7YJC1\nR+xka3OheUIA1gehhoPPbgoN3Sj2DwQqgaJnX1Y7ypHMVceVpIxcnofqOjAdifpb\nNCvo/26FEYyYsntRFGrr0Ha8CumXQvP6z9K8dVXWELia43nPqlquC7ZRnyOyJdQn\nCdQWGwXLYFmMFEyL3uXj7jNaCcMYmquQhvvn/3QahM78DWjZ8qRO7gyhy+fFQWBz\nUOLcPlgGVlu45x2b5dAwoY2s6vyVNBfP0iNybTezxxX7QA+59SexvoGbkEZzhqGv\n+YolHrp0i1W8rM0LOiw93dAeEb9xsxg0kL/7kKo3L8pFSg0C63hcLvSp3qh5sKbm\nViFku0O7AgMBAAECggEABQtK3hse2WIUfK4FPFf/9nCzu8uwIyw3lsK/MMs9uDau\n0SkbgaBjHwgd2SWEpdCUWO3cUAnQ1GKANvvqowEHQDsOEZGvANRF4bcBEkz60Jnj\nbzQvrD3oGRw+/SSDrc1HUz8LtRsh0xRIUDpn7PuSBtC9klIovWljZg24F2zZcEEL\nOURHCGgruu1eF+dRaTp030ckndhd5Js7TzK9tLZdsrIXKIt2JztIXI9C82Nq3zbg\nKx4fzWbRmRom6t+Z3ywpDUwv3n7V4GYt301WQ0rM8e6EhtM5Bb5VayOtL7/aypOT\nz9l0dB1Bw4K0OdcWwQhC82tIeTYODVOudxTCxGlxhQKBgQD0cet7Lr/lZZyQSwLQ\nz3+Cn6XTde2PsxVOZHj8m98OwhFFln3DR2sBOKRrZnkdur4Le9dzOpp+oZJj4whY\ny/yAq1OtEFuvKbMJRSci2tT5Omd1D4BxGwmqPHMnAImVpR+JOss4t1jeZbJMrvcR\n5Jn38S1lhxXH8NXpLlTKn6ng/wKBgQDEdsokJ/3M3tRKa2UBrHnAUN/6p/XqrqoV\n0jUn+KTcsDda2rmKXS5tqCqH8kbUwwL1WerRBbvdw8ThA9PyeiIrLwLo4UzMR6nc\noH69TIGmxwO6ta8hIXV3Tra2qTVf2giR8LOXW5nZzG84HWKDAZmVxYDJrs1Xp1QT\nlkS4cU9hRQKBgQCNzHu+ZFsa9jvBFFJY0NV176hhJ1qcblUguXXZi430YK1mQatI\nmWhAOBxg1PvTPB28SaWsiUVPyehCm1OfNw2NklUi4odc8AKUkRHnzSuYO8ICDPEE\nK5wKrbBa4pvtO/E0SO/UQb+Cm1m31BMsxQBv7O7Zo2gGKPXdo2u6cq43/wKBgGno\nY4XkLRRA1w4bIMMrOCLtNiDIZHATokrLG66lgjIZqG2I1VZ6buncKrlIaNiPG8wp\nocT2I1UkEMEAMERZhIvk9tuVgLHqu+3ccxYW5RmD1UXUZUkl4U3kl+iWBNjcD5yk\nthuU3LYlV5tXc+CNfz7WzltqqPVklZVNf1QyeQlFAoGARQzQa9muOlc3VwqkyEAC\n5oIkZqbnC1YwGbVI9bmxVK91rGwGFDgVoIVyclCdbFnA5d64oNB9q97Lz46MOG4z\nYdyFYsjPQqeIGHONQHPs+tyWzrzFtFdWNAewgFaf9+uQgq1J7DKAgqEk01wh9GW0\nJ75NUxdiLzTjwgew1NvqoP8=\n-----END PRIVATE KEY-----\n"
 const emailID="jessojacob01@gmail.com"
 const password="Amy92386436!"
+const db_port="3306"
+const user="bdb5bb52df06bd"
+const db_password="c9b54795"
+const database="heroku_8b28770b719d60a"
+const host="us-cdbr-east-04.cleardb.com"
 
  
 module.exports.key = key;           //or if using json keys - module.exports.key = key; 
 module.exports.emailID = emailID;
 module.exports.password = password;
+module.exports.db_port = db_port;
+module.exports.user = user;
+module.exports.db_password = db_password;
+module.exports.database = database;
+module.exports.host = host;
