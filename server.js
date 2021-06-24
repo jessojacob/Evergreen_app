@@ -12,7 +12,6 @@ dotenv.config( { path : 'config.env'} )
 const PORT = process.env.PORT || 8080
 
 console.log('PORT: '+PORT);
-console.log('process.env.key: '+process.env.key);
 
 // log requests
 app.use(morgan('tiny'));
