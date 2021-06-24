@@ -40,6 +40,8 @@ function slot_book(i,id){
     //console.log(date_time[0]+''+date_time[1])
     date=date_time[0].concat('T',date_time[1],':00+05:30')
 
+    console.log('date: '+date);
+
     var request = {
         "url" : 'https://'+location.host+'/api/slot/${date}/${id}',
         "method" : "POST"
