@@ -3,7 +3,7 @@ var connectDB = require('../database/connection')
 const CONFIG = require('../config/Settings');
 const CalendarAPI = require('node-google-calendar');
 const transporter = require('../services/gmail');
-let cal = new CalendarAPI(CONFIG);y
+let cal = new CalendarAPI(CONFIG);
 var moment = require('moment-timezone');
 
 // search user
