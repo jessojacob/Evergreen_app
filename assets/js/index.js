@@ -33,7 +33,7 @@ function slot_book(i,id){
 
     var myTab = document.getElementById('slots');   
     console.log(id+' '+i)
-    console.log('host: '+document.getElementById('slots').host);
+    console.log('host: '+location.host);
 
     row=myTab.rows[i].cells
     date_time=row.item(0).innerHTML.split(' ',2)
