@@ -15,7 +15,7 @@ $("#update_user").submit(function(event){
     
     console.log("data.id" + data.id)
     var request = {
-        "url" : `http://`+location.host+`/api/users/${data.id}`,
+        "url" : `https://`+location.host+`/api/users/${data.id}`,
         "method" : "PUT",
         "data" : data
     }
@@ -43,7 +43,7 @@ function slot_book(i,id){
     console.log('date: '+date);
 
     var request = {
-        "url" : `http://`+location.host+`/api/slot/${date}/${id}`,
+        "url" : `https://`+location.host+`/api/slot/${date}/${id}`,
         "method" : "POST"
     }
     
@@ -74,7 +74,7 @@ if(window.location.pathname == "/"){
         var id = $(this).attr("data-id")
 
         var request = {
-            "url" : `http://`+location.host+`/api/users/${id}`,
+            "url" : `https://`+location.host+`/api/users/${id}`,
             "method" : "DELETE"
         }
 
