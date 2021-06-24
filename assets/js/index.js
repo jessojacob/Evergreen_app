@@ -33,7 +33,7 @@ function slot_book(i,id){
 
     var myTab = document.getElementById('slots');   
     console.log(id+' '+i)
-    console.log('url: '+document.URL);
+    console.log('url: '+document);
     console.log('host: '+document.HOST);
 
     row=myTab.rows[i].cells
