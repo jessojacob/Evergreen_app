@@ -225,6 +225,9 @@ exports.book_slot = async (req, res)=>{
         res.send(2)
     }
 
+    console.log('req.params.date'+req.params.date)
+    console.log('req.params.id'+req.params.id)
+
     var fromDate= req.params.date
 
     var split=req.params.date.split('T',2)
