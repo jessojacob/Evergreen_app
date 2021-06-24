@@ -1,0 +1,68 @@
+<!-- include header -->
+<%- include('include/_header') %>
+<!-- /include header -->
+<main id="site-main">
+    <% if (users.length>0){ %>
+        <div class="container">
+            <div class="form-title text-center">
+                <h2 class="text-dark">Account details</h2>
+            </div>
+                        <!-- form handling -->
+            <form action="/" method="POST">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>@Email</th>
+                            <th>Gender  </th>
+                            <th>Phone</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%- include('include/_show_patient') %>
+                    </tbody>
+                </table>
+            </form>
+
+            <div class="form-title text-center">
+                <h2 class="text-dark">Last 5 Sessions of <%= users[0].member_name %></h2>
+            </div>  
+                        <!-- form handling -->
+            <!-- form handling -->
+            <form action="/" method="POST">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Date</th>
+                            <th>Remarks</th>
+                            <th>Presciption</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%- include('include/_show_consulations') %>
+                    </tbody>
+                </table>
+            </form>
+            <div class="box-nav d-flex justify-between">
+                <a href="/consultation-view?id=<%= users[0].member_id %>" class="border-shadow">
+                    <span class="text-gradient">Book consulation <i class="fas fa-user"></i></span>
+                </a>
+            </div>
+        </div>
+    <% }else{ %>
+        <script>
+            alert("User not registered, please register.");
+            window.location.href = '/'
+        </script>
+    <% } %>
+    
+</main>
+<!-- /Main Site -->
+
+  <!-- include footer -->
+  <%- include('include/_footer') %>
+  <!-- /include footer -->
+  

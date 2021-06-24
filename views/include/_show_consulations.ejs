@@ -1,0 +1,10 @@
+<% if (users.length>0){
+    if (users[0].session_id){
+    for(var i = 0; i < users.length; i++) { %>
+    <tr>
+        <td><%= i + 1 %></td>
+        <td><%= users[i].create_date.slice(0,10) %></td>
+        <td><%= users[i].remarks %></td>
+        <td><%= users[i].prescription %></td>
+    </tr>
+    <% }}} %>

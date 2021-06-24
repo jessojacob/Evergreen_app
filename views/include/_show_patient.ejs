@@ -1,0 +1,19 @@
+    <% if (users.length>0){ %>
+    <tr>
+        <td>1</td>
+        <td><%= users[0].name %></td>
+        <td><%= users[0].email %></td>
+        <td><%= users[0].gender %></td>
+        <td><%= users[0].phone_no %></td>
+        <td>
+            <a href="/update-user?id=<%= users[0]._id%>" class="btn border-shadow update">
+                <span class="text-gradient"><i class="fas fa-pencil-alt"></i></span>
+            </a>
+        </td>
+    </tr>
+    <% }
+    else{ %>
+    <tr>
+        <td>No file found/check email/creat new user</td>
+    </tr>
+    <% } %>

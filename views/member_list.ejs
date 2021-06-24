@@ -1,0 +1,76 @@
+<!-- include header -->
+<%- include('include/_header') %>
+<!-- /include header -->
+    <main id="site-main">
+        <% if (users.length>0){ %>
+            <div class="container">
+                <div class="form-title text-center">
+                    <h2 class="text-dark">User details</h2>
+                </div>
+                            <!-- form handling -->
+                <form action="/" method="POST">
+                    <table class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Gender  </th>
+                                <th>Phone</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%- include('include/_show_patient') %>
+                        </tbody>
+                    </table>
+                </form>
+
+                <div class="form-title text-center">
+                    <h2 class="text-dark">List of members</h2>
+                </div>
+                            <!-- form handling -->
+                <form action="/" method="POST">
+                    <table class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Gender  </th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for(var i = 0; i < users.length; i++) { %>
+                                <tr>
+                                    <td><%= i+1 %></td>
+                                    <td><%= users[i].member_name %></td>
+                                    <td><%= users[i].member_gender %></td>
+                                    <td>
+                                        <a href="/patient-view?id=<%= users[i].member_id%>" class="btn border-shadow update">
+                                            <span class="text-gradient"><i class="fas fa-eye"></i></i></span>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <% } %>
+                        </tbody>
+                    </table>
+                </form>
+                <br>
+
+                <div class="box-nav d-flex justify-between">
+                    <a href="/add-member?id=<%= users[0]._id %>" class="border-shadow">
+                        <span class="text-gradient">Add a member <i class="fas fa-user"></i></span>
+                    </a>
+                </div>
+            </div>
+        <% }else{ %>
+            <script>
+                alert("User not registered, please register.");
+                window.location.href = '/'
+            </script>
+        <% } %>
+    </main>
+<!-- include footer -->
+<%- include('include/_footer') %>
+<!-- /include footer -->

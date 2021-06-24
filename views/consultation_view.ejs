@@ -1,0 +1,68 @@
+<!-- include header -->
+<%- include('include/_header') %>
+<!-- /include header -->
+<!-- Main Site -->
+<main id="site-main">
+    <div class="container">
+        <!-- form handling -->
+        <div class="form-title text-center">
+            <h2 class="text-dark">Search for a slot</h2>
+            <span class="text-light">Pick a date</span>
+        </div>
+
+        <form class="form-title text-center" action="/slot-list">
+            <input type="date" id="session" name="session">
+            <input type="hidden" value="<%= member_id %>" id="member_id" name="member_id">
+            <div class="form-group">
+                <button type="submit" class="btn text-dark update">Find a slot</button>
+            </div>
+        </form>
+        
+        <div class="form-title text-center" id="date">
+            <h2 id="date" class="text-dark">Availability for <%= slot[1] %></h2>
+            <span class="text-light">Pick a slot</span>
+        </div>
+
+        <!-- form handling -->
+        <form  id="consultation_view">
+            <table class="table" id="slots">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Slots available</th>
+                        <th>Availability</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (slot){ 
+                        var j = 2;
+                        k=1; 
+                        for (var i = 9;i < 18;i++){
+                            if (i!==12 && i!==13 && i!==14){ 
+                                 
+                                if (slot[j]!=='busy'){ %>
+                                <tr>
+                                    <td id="time"><%= slot[1] %> <%= i %>:00 am</td>
+                                    <td><%= slot[j] %></td>
+                                    <td>
+                                        <div class="form-group">
+                                            <input type="button" id="slotbook" value="Book" onclick="slot_book('<%= k %>','<%= slot[0] %>')" />
+                                        </div>
+                                    </td>
+                                </tr>
+                                <% k++;} %>
+                    <% j++;}}}
+                    else{ %>
+                        <tr>
+                            <td>No slots/ please pick a date</td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</main>
+<!-- /Main Site -->
+  <!-- include footer -->
+  <%- include('include/_footer') %>
+  <!-- /include footer -->

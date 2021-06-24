@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD Application</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    
+    <!-- Header -->
+        <header id="header">
+            <nav>
+                <div class="container">
+                    <div class="text-center">
+                        <a href="/" class="nav-brand text-dark">User Management System</a>
+                    </div>
+                </div>
+            </nav>
+        </header>
+    <!-- /Header -->
+    <main id="site-main">
+        <div class="container">
+            <div class="form-title text-center">
+                <h2 class="text-dark">Patient details</h2>
+            </div>
+                        <!-- form handling -->
+            <form action="/" method="POST">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>@Email</th>
+                            <th>Gender</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </form>
+            <div class="box-nav d-flex justify-between">
+                <a href="/patient-book" class="border-shadow">
+                    <span class="text-gradient">Book consulation <i class="fas fa-user"></i></span>
+                </a>
+            </div>
+            <div class="form-title text-center">
+                <h2 class="text-dark">Last 5 Sessions</h2>
+            </div>
+                        <!-- form handling -->
+            <form action="/" method="POST">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Date</th>
+                            <th>Remarks</th>
+                            <th>Presciption</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% for(var i = 0; i < users.length; i++) { %>
+                            <tr>
+                                <td><%= i + 1 %></td>
+                                <td><%= users[i].date %></td>
+                                <td><%= users[i].remarks %></td>
+                                <td><%= users[i].presciptions %></td>
+                            </tr>
+                            <% } %>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+        
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+    <script src="/js/index.js"></script>
+    </body>
+    </html>
