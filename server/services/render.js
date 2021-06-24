@@ -29,7 +29,7 @@ exports.Patient_view = (req, res) => {
 
 exports.Member_list = (req, res) => {
     // Make a get request to /api/users
-    axios.get('https://evergreen-deploy.herokuapp.com/api/users',{ params : { phone : req.query.phone }})
+    axios.get('http://evergreen-deploy.herokuapp.com/api/users',{ params : { phone : req.query.phone }})
         .then(function(response){
             console.log('response'+response.data)
             res.render('member_list', { users : response.data });
