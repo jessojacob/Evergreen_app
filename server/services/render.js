@@ -3,7 +3,7 @@ const axios = require('axios');
 
 exports.homeRoutes = (req, res) => {
     // Make a get request to /api/users
-    axios.get('http://localhost:3000/api/users')
+    axios.get('http://'+req.get('host')+'/api/users')
         .then(function(response){
             res.render('patien_view', { users : response.data });
         })
@@ -16,7 +16,7 @@ exports.homeRoutes = (req, res) => {
 
 exports.Patient_view = (req, res) => {
     // Make a get request to /api/users
-    axios.get('http://localhost:3000/api/users',{ params : { id : req.query.id }})
+    axios.get('http://'+req.get('host')+'/api/users',{ params : { id : req.query.id }})
         .then(function(response){
             console.log('response'+response.data)
             res.render('patient_view', { users : response.data });
@@ -42,7 +42,7 @@ exports.Member_list = (req, res) => {
 
 exports.slot_list = (req, res) =>{
     console.log('req.query.session '+req.query.session)
-    axios.get('http://localhost:3000/api/consultation', { params : { date : req.query.session, id : req.query.member_id }})
+    axios.get('http://'+req.get('host')+'/api/consultation', { params : { date : req.query.session, id : req.query.member_id }})
         .then(function(response){
           //  console.log("slot: "+response.data)
             res.render("consultation_view", { slot : response.data, member_id:''})
@@ -68,7 +68,7 @@ exports.Add_member = (req, res) =>{
 
 exports.update_user = (req, res) =>{
     console.log('req.query.id'+req.query.id)
-    axios.get('http://localhost:3000/api/users/findid', { params : { id : req.query.id }})
+    axios.get('http://'+req.get('host')+'/api/users/findid', { params : { id : req.query.id }})
         .then(function(userdata){
             res.render("update_user", { user : userdata.data[0]})
         })
