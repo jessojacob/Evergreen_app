@@ -33,8 +33,7 @@ exports.Member_list = (req, res) => {
     axios.get('http://'+req.get('host')+'/api/users',{ params : { phone : req.query.phone }})
         .then(function(response){
             console.log('response'+response.data)
-            res.render('member_list', { users : response.data });
-        })
+            res.render('member_lis', { users : response.data });        })
         .catch(err =>{
             res.send(err);
         })
