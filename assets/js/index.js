@@ -15,7 +15,7 @@ $("#update_user").submit(function(event){
     
     console.log("data.id" + data.id)
     var request = {
-        "url" : 'https://'+location.host+'/api/users/${data.id}',
+        "url" : `http://`+location.host+`/api/users/${data.id}`,
         "method" : "PUT",
         "data" : data
     }
@@ -35,7 +35,7 @@ function slot_book(i,id){
     console.log(id+' '+i)
     console.log('host: '+location.host);
 
-    row=myTab.rows[i].cells
+    row=myTab.rows[i].cells 
     date_time=row.item(0).innerHTML.split(' ',2)
     //console.log(date_time[0]+''+date_time[1])
     date=date_time[0].concat('T',date_time[1],':00+05:30')
@@ -43,7 +43,7 @@ function slot_book(i,id){
     console.log('date: '+date);
 
     var request = {
-        "url" : 'https://'+location.host+'/api/slot/${date}/${id}',
+        "url" : `http://`+location.host+`/api/slot/${date}/${id}`,
         "method" : "POST"
     }
     
@@ -74,7 +74,7 @@ if(window.location.pathname == "/"){
         var id = $(this).attr("data-id")
 
         var request = {
-            "url" : 'https://'+location.host+'/api/users/${id}',
+            "url" : `http://`+location.host+`/api/users/${id}`,
             "method" : "DELETE"
         }
 
