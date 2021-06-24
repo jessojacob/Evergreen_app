@@ -3,7 +3,7 @@ var connectDB = require('../database/connection')
 const CONFIG = require('../config/Settings');
 const CalendarAPI = require('node-google-calendar');
 const transporter = require('../services/gmail');
-let cal = new CalendarAPI(CONFIG);
+let cal = new CalendarAPI(CONFIG);y
 var moment = require('moment-timezone');
 
 // search user
@@ -16,9 +16,9 @@ exports.search = (req,res)=>{
         var sql = "SELECT p._id,p.name,p.email,p.phone_no,p.gender,p.status,m.member_id,m.member_name,c.session_id,c.create_date,c.remarks,c.prescription FROM patients p JOIN members m on p._id=m._id LEFT OUTER JOIN consultations c ON c.member_id=m.member_id WHERE m.member_id = ? order by c.create_date DESC LIMIT 5";
     // var select = "p.name,p.email,p.gender,p.status,c.create_date,c.remarks,c.prescription"
         connectDB.query(sql,[req.query.id],(err,result)=>{
-            if (err) throw err;
+            //if (err) throw err;
             if(!result){
-                //res.status(404).send({ message : "Not found user with email "+ req.query.phone})
+                res.status(404).send({ message : "Not found user with email "+ req.query.phone})
             }else{
                 var format = 'YYYY-MM-DD HH:mm:ss ZZ';
                 for (var i=0;i<result.length;i++){
@@ -32,7 +32,7 @@ exports.search = (req,res)=>{
     else if (req.query.phone){
         var sql = "SELECT  p._id,p.name,p.email,p.phone_no,p.gender,p.status,m.member_id,m.member_name,m.member_gender FROM patients p LEFT OUTER JOIN members m ON p._id=m._id WHERE phone_no = ?"
         connectDB.query(sql,[req.query.phone],(err,result)=>{
-            if (err) throw err;
+            //if (err) throw err;
             if(!result){
                 es.status(404).send({ message : "Not found user with phone number "+ req.query.phone})
             }else{
