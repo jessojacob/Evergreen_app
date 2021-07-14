@@ -58,6 +58,10 @@ a {
     color: var(--light);
 }
 
+.text-red{
+    color: red
+}
+
 .text-gradient{
     background: linear-gradient(to right, #8e2de2, #4a00e0);
     -webkit-background-clip: text;
@@ -153,13 +157,17 @@ table{
 
 #find_user .form-group,
 #update_user .form-group,
-#add_user .form-group{
+#update_prescription .form-group,
+#add_user .form-group,
+#admin_login .form-group{
     margin: .4em 0;
 }
 
 #find_user .form-group input[type="text"],
 #update_user .form-group input[type="text"],
-#add_user .form-group input[type="text"]{
+#update_prescription .form-group input[type="text"],
+#admin_login .form-group input[type="text"],
+#admin_login .form-group input[type="password"]{
     width: 100%;
     padding: .6em 1em;
     margin: .5em 0;
@@ -171,7 +179,8 @@ table{
 
 #find_user .form-group .radio,
 #update_user .form-group .radio,
-#add_user .form-group .radio{
+#add_user .form-group .radio,
+#admin_login .form-group .radio{
     margin: 1em 2em;
 }
 
@@ -217,7 +226,10 @@ table{
 
 #find_user .form-group .btn, 
 #update_user .form-group .btn,
-#add_user .form-group .btn{
+#update_prescription .form-group .btn,
+#add_user .form-group .btn,
+#admin_login .form-group .btn,
+#patient_view .form-group .btn{
     width: 100%;
     padding: .9em 1em;
     background-color:#16db93; 
@@ -229,9 +241,32 @@ table{
     margin: .5em 0;
 }
 
+#patient_view .pagination .btn,
+#patient_view .table .btn{
+    cursor: pointer;
+}
+
+.pagination li:hover{
+    cursor: pointer;
+}
+
+.page {
+    display: inline-block;
+    border: 2px  var(--border);
+    width: 2em;
+    box-shadow: outset 0 0 0 1px #e9ecef;
+    text-align: center;
+    }
+
+.active {
+    background-color: #16db93;
+}
+
 #find_user .form-group .btn:hover,
 #update_user .form-group .btn:hover,
-#add_user .form-group .btn:hover{
+#update_prescription .form-group .btn:hover,
+#add_user .form-group .btn:hover
+#admin_login .form-group .btn:hover{
     background-color: var(--dark);
     color: var(--border);
 }

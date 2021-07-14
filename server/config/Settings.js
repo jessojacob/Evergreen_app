@@ -1,9 +1,9 @@
 const CONFIG = require('../env/config');
 
 const key = CONFIG.key
-const SERVICE_ACCT_ID = 'node-project-jesso@crud-application-node-master.iam.gserviceaccount.com';
+const SERVICE_ACCT_ID = " ";
 const CALENDAR_ID = {
-    'primary': '8ef4s360m3s9qd0ictes0hsmg8@group.calendar.google.com'
+    'primary': ' '
 };
 const TIMEZONE = 'GMT+05:30';
 

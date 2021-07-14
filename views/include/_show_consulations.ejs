@@ -3,8 +3,18 @@
     for(var i = 0; i < users.length; i++) { %>
     <tr>
         <td><%= i + 1 %></td>
-        <td><%= users[i].create_date.slice(0,10) %></td>
+        <td><%= users[i].create_date.slice(0,16) %></td>
         <td><%= users[i].remarks %></td>
         <td><%= users[i].prescription %></td>
-    </tr>
-    <% }}} %>
+        <% if (admin=="yes"){ %>
+            <td>
+                <a href="/update_prescription?id=<%= users[i].session_id%>&admin=<%= admin %>" class="btn border-shadow update">
+                    <span class="text-gradient"><i class="fas fa-pencil-alt"></i></span>
+                </a>
+                <a class="btn border-shadow delete" session-id="<%= users[i].session_id %>" session="<%= users[i].create_date.slice(0,16) %>" >
+                    <span class="text-gradient"><i class="fas fa-times"></i></span>
+                </a>
+            </td>
+        <% } %>
+    </tr>   
+<% }}} %>

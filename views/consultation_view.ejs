@@ -13,6 +13,7 @@
         <form class="form-title text-center" action="/slot-list">
             <input type="date" id="session" name="session">
             <input type="hidden" value="<%= member_id %>" id="member_id" name="member_id">
+            <input type="hidden" value="<%= admin %>" id="admin" name="admin">
             <div class="form-group">
                 <button type="submit" class="btn text-dark update">Find a slot</button>
             </div>
@@ -46,7 +47,7 @@
                                     <td><%= slot[j] %></td>
                                     <td>
                                         <div class="form-group">
-                                            <input type="button" id="slotbook" value="Book" onclick="slot_book('<%= k %>','<%= slot[0] %>')" />
+                                            <input type="button" id="slotbook" value="Book" onclick="slot_book('<%= k %>','<%= slot[0] %>','<%= admin %>')" />
                                         </div>
                                     </td>
                                 </tr>

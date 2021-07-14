@@ -1,0 +1,41 @@
+
+<!-- include header -->
+<%- include('include/_header') %>
+<!-- /include header -->
+
+  <!-- Main Site -->
+  <main id="site-main">
+    <div class="container">
+        <div class="form-title text-center">
+            <h2 class="text-dark">Update prescription</h2>
+            <span class="text-light">Use the below form to update prescription</span>
+        </div>
+
+        <!-- update prescription form -->
+        <form method="POST" id="update_prescription">
+            <div class="new_user">
+                <div class="form-group">
+                    <label for="prescription" class="text-light">Presciption</label>
+                    <input type="hidden" value="<%= prescription.session_id %>" id="id" name="id">
+                    <input type="hidden" value="<%= prescription.member_id %>" id="member_id" name="member_id">
+                    <input type="hidden" value="<%= admin %>" id="admin" name="admin">
+                    <input type="text" name="prescription" value="<%= prescription.prescription %>" placeholder="">
+                </div>
+                <div class="form-group">
+                    <label for="remarks" class="text-light">Remarks</label>
+                    <input type="text" name="remarks" value="<%= prescription.remarks %>" placeholder="">
+                </div>      
+                <div class="form-group">
+                    <button type="submit" class="btn text-dark update">Save</button>
+                </div>
+        
+            </div>
+        </form>
+       
+    </div>
+</main>
+<!-- /Main Site -->
+
+<!-- include footer -->
+<%- include('include/_footer') %>
+<!-- /include footer -->

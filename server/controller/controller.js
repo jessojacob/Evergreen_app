@@ -5,6 +5,7 @@ const CalendarAPI = require('node-google-calendar');
 const transporter = require('../services/gmail');
 let cal = new CalendarAPI(CONFIG);
 var moment = require('moment-timezone');
+const { password } = require('../env/config');
 
 // search user
 exports.search = (req,res)=>{
@@ -13,7 +14,7 @@ exports.search = (req,res)=>{
         return;
     }
     if (req.query.id){
-        var sql = "SELECT p._id,p.name,p.email,p.phone_no,p.gender,p.status,m.member_id,m.member_name,c.session_id,c.create_date,c.remarks,c.prescription FROM patients p JOIN members m on p._id=m._id LEFT OUTER JOIN consultations c ON c.member_id=m.member_id WHERE m.member_id = ? order by c.create_date DESC LIMIT 5";
+        var sql = "SELECT p._id,p.name,p.email,p.phone_no,p.gender,p.status,m.member_id,m.member_name,c.session_id,c.create_date,c.remarks,c.prescription FROM patients p JOIN members m on p._id=m._id LEFT OUTER JOIN consultations c ON c.member_id=m.member_id WHERE m.member_id = ? order by c.create_date DESC LIMIT 15";
     // var select = "p.name,p.email,p.gender,p.status,c.create_date,c.remarks,c.prescription"
         connectDB.query(sql,[req.query.id],(err,result)=>{
             //if (err) throw err;
@@ -36,6 +37,31 @@ exports.search = (req,res)=>{
             if(!result){
                 es.status(404).send({ message : "Not found user with phone number "+ req.query.phone})
             }else{
+                res.send(result)
+            }
+        } )
+    }
+    else if (req.query.name){
+        var search_name = '%'+req.query.name+'%'
+        var sql = "SELECT  p._id,p.name,p.email,p.phone_no,p.gender,p.status,m.member_id,m.member_name,m.member_gender FROM patients p LEFT OUTER JOIN members m ON p._id=m._id WHERE LOWER(m.member_name) like LOWER(?)"
+        connectDB.query(sql,[search_name],(err,result)=>{
+            //if (err) throw err;
+            if(!result){
+                res.status(404).send({ message : "Not found user with phone number "+ req.query.phone})
+            }else{
+                console.log(result)
+                res.send(result)
+            }
+        } )
+    }
+    else if (req.query.session_id){
+        var sql = "SELECT  c.session_id,c.prescription,c.remarks,c.member_id FROM consultations c WHERE c.session_id = ? "
+        connectDB.query(sql,[req.query.session_id],(err,result)=>{
+            //if (err) throw err;
+            if(!result){
+                res.status(404).send({ message : "Not found user with phone number "+ req.query.phone})
+            }else{
+                console.log(result)
                 res.send(result)
             }
         } )
@@ -69,6 +95,32 @@ exports.create_user = (req,res)=>{
                     res.redirect('/add-user');
                 } )
             } )
+        }
+    } )
+
+}
+
+//admin login
+exports.login = (req,res)=>{
+    if(!req.body){
+        res.status(400).send({ message : "Content can not be emtpy!"});
+        return;
+    }
+
+    console.log(req.body)
+    var sql = "SELECT credential_id FROM credential WHERE username = ? and password = ?";
+    connectDB.query(sql, [req.body.username,req.body.password], (err,result)=>{
+        //if (err) throw err;
+        if(!result){
+            res.send("admin validation failed")
+        }else{
+            console.log(result[0])
+           if(result[0]){
+                res.redirect('/admin-search')
+            }
+            else{
+                res.redirect('/admin-login?login=false')
+            }
         }
     } )
 
@@ -134,7 +186,7 @@ exports.find_slot = async (req,res)=>{
                         slot.push('free')
                     }
                     if (f==6){
-                        res.send(slot)
+                        res.send(Array(slot,req.query.admin))
                     }
                 })
                 .catch(err => {
@@ -173,6 +225,8 @@ exports.find = (req, res)=>{
     
 }
 
+
+
 // Update a new idetified user by user id
 exports.update = (req, res)=>{
     if(!req.body){
@@ -180,42 +234,110 @@ exports.update = (req, res)=>{
             .status(400)
             .send({ message : "Data to update can not be empty"})
     }
-
+    console.log('req.params.id'+req.params.id)
+    console.log('req.params.session_id'+req.params.session_id)
     const id = req.params.id;
-    
-    var sql = "UPDATE patients SET name=?,email=?,phone_no=?,gender=?,status=? WHERE _id=?"
-    var values = new Array(req.body.name,req.body.email,req.body.phone,req.body.gender,req.body.status);
+    if (req.params.id){
+        var sql = "UPDATE patients SET name=?,email=?,phone_no=?,gender=?,status=? WHERE _id=?"
+        var values = new Array(req.body.name,req.body.email,req.body.phone,req.body.gender,req.body.status);
 
-    connectDB.query(sql, [req.body.name,req.body.email,req.body.phone,req.body.gender,req.body.status,id], (err,result)=>{
-        if (err) throw err;
-        console.log("Number of records inserted: " + result.affectedRows);
-        if(!result){
-            res.status(404).send({ message : `Cannot Update user with ${id}. Maybe user not found!`})
-        }else{
-            res.send(result)
-        }
-    } )
+        connectDB.query(sql, [req.body.name,req.body.email,req.body.phone,req.body.gender,req.body.status,id], (err,result)=>{
+            if (err) throw err;
+            console.log("Number of records inserted: " + result.affectedRows);
+            if(!result){
+                res.status(404).send({ message : `Cannot Update user with ${id}. Maybe user not found!`})
+            }else{
+                res.send(result)
+            }
+        } )
+    }
+    else if (req.params.session_id){
+        console.log('req.params.session_id'+req.params.session_id)
+        var sql = "UPDATE consultations SET prescription=?,remarks=? WHERE session_id=?"
+        var values = new Array(req.body.prescription,req.body.remarks,req.params.session_id);
+
+        connectDB.query(sql, [req.body.prescription,req.body.remarks,req.params.session_id], (err,result)=>{
+            if (err) throw err;
+            console.log("Number of records inserted: " + result.affectedRows);
+            if(!result){
+                res.status(404).send({ message : `Cannot Update user with ${id}. Maybe user not found!`})
+            }else{
+                res.send(result)
+            }
+        } )
+    }
 }
 
 // Delete a user with specified user id in the request
 exports.delete = (req, res)=>{
     const id = req.params.id;
+    const session = req.params.session
 
-    Userdb.findByIdAndDelete(id)
-        .then(data => {
-            if(!data){
-                res.status(404).send({ message : `Cannot Delete with id ${id}. Maybe id is wrong`})
-            }else{
-                res.send({
-                    message : "User was deleted successfully!"
+    console.log('req.params.session'+req.params.session    )
+    
+    if(req.params.session){
+        var split=req.params.session.split(':',2)
+        var split1 = split[0].split(' ',2)
+        split1[1]=Number(split1[1])
+        var hours = split1[1]+1
+        var date = req.params.session.split(' ',2)
+        var fromDate = date[0].concat('T',date[1],':00+05:30')
+        var toDate = date[0].concat('T',hours,':00:00+05:30')
+
+        console.log('fromDate '+fromDate)
+        console.log('toDate '+toDate)
+        //get event ID
+        let params = {
+            timeMin: fromDate,
+            timeMax: toDate,
+            singleEvents: true,
+            orderBy: 'startTime'
+        }; 	//Optional query parameters referencing google APIs
+        
+        cal.Events.list(CONFIG.calendarId['primary'], params)
+          .then(json => {
+            //Success
+            console.log('List of events on calendar within time-range:');
+            console.log(json[0].id);
+            let params = {
+                sendNotifications: true
+            };
+            //delete event    
+            cal.Events.delete(CONFIG.calendarId['primary'], json[0].id, params)
+            .then(results => {
+                console.log('delete Event:' + JSON.stringify(results));
+                //delete session from DB
+                var sql = "DELETE FROM consultations WHERE session_id = ? "
+                connectDB.query(sql,[req.params.id],(err,result)=>{
+                    if (err) throw err;
+                    console.log('Deleted session'+result)
+                    res.send('')
                 })
-            }
-        })
-        .catch(err =>{
-            res.status(500).send({
-                message: "Could not delete User with id=" + id
+            }).catch(err => {
+                console.log('Error deleteEvent:' + JSON.stringify(err.message));
             });
-        });
+          }).catch(err => {
+            //Error
+            console.log('Error: listSingleEvents -' + err.message);
+          });
+    }
+    else{
+        Userdb.findByIdAndDelete(id)
+            .then(data => {
+                if(!data){
+                    res.status(404).send({ message : `Cannot Delete with id ${id}. Maybe id is wrong`})
+                }else{
+                    res.send({
+                        message : "User was deleted successfully!"
+                    })
+                }
+            })
+            .catch(err =>{
+                res.status(500).send({
+                    message: "Could not delete User with id=" + id
+                });
+            });
+        }
 }
 
 // Book slot IN CALENDAR and insert in DB
@@ -235,6 +357,7 @@ exports.book_slot = async (req, res)=>{
     split1 = split[1].split(':',2)
     split1[0]=Number(split1[0])
     hours = split1[0]+1
+    book_date = book_date+' '+split1[0]+':00:00'
     
     var toDate = split[0].concat('T',hours,':00:00+05:30')
 
